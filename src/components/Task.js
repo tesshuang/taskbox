@@ -19,7 +19,7 @@ export default function Task({ task:{id, title, state }, onArchiveTask, onPinTas
       
       <div className="actions" onClick={event => event.stopPropagation()}>
         {state !== 'TASK_ARCHIVED' && (
-          <a onClick={() => onPinTask(id)} href>
+          <a onClick={() => onPinTask(id)} href={`some link`}>
             <span className={`icon-star`}/>
           </a>
         )}
