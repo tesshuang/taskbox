@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Task({ task:{id, title, state }, onArchiveTask, onPinTask }) {
   return(
@@ -6,7 +7,7 @@ export default function Task({ task:{id, title, state }, onArchiveTask, onPinTas
       <label className="checkbox">
         <input
           type="checkbox"
-          defaultCheck={state === 'TASK_ARCHIVED'}
+          defaultChecked={state === 'TASK_ARCHIVED'}
           disabled={true}
           name="checked"
         />
@@ -18,11 +19,21 @@ export default function Task({ task:{id, title, state }, onArchiveTask, onPinTas
       
       <div className="actions" onClick={event => event.stopPropagation()}>
         {state !== 'TASK_ARCHIVED' && (
-          <a onClick={() => onPinTask(id)}>
+          <a onClick={() => onPinTask(id)} href>
             <span className={`icon-star`}/>
           </a>
         )}
       </div>
     </div>
   )
+}
+
+Task.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+  }),
+  onArchiveTask: PropTypes.func,
+  onPinTask: PropTypes.func, 
 }
